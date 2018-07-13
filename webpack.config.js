@@ -11,8 +11,16 @@ Encore
     // .enableVersioning(Encore.isProduction())
 
     // uncomment to define the assets of the project
-    .addEntry('js/app', './assets/js/app.js')
-    .addStyleEntry('css/main', './assets/css/main.scss')
+    .addEntry('js/bootstrap', './assets/js/bootstrap.bundle.min.js')
+    .addEntry('js/jquery', './assets/js/jquery-2.0.0.min.js')
+    .addEntry('js/script', './assets/js/script.js')
+    .addStyleEntry('css/bootstrap', './assets/css/bootstrap-custom.scss')
+    .addStyleEntry('css/responsive', './assets/css/responsive.scss')
+    .addStyleEntry('css/uikit', './assets/css/uikit.scss')
+    .addStyleEntry('fonts/fontawesome', './assets/fonts/fontawesome/scss/fontawesome.scss')
+    .addStyleEntry('fonts/fa-brands', './assets/fonts/fontawesome/scss/fa-brands.scss')
+    .addStyleEntry('fonts/fa-regular', './assets/fonts/fontawesome/scss/fa-regular.scss')
+    .addStyleEntry('fonts/fa-solid', './assets/fonts/fontawesome/scss/fa-solid.scss')
 
     // uncomment if you use Sass/SCSS files
     .enableSassLoader()
