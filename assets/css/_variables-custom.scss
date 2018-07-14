@@ -27,6 +27,7 @@ $black:    #000 !default;
 
 
 $blue:    #007bff !default;
+$cat:    #ffdc64 !default;
 $indigo:  #6610f2 !default;
 $purple:  #6f42c1 !default;
 $pink:    #e83e8c !default;
@@ -38,7 +39,7 @@ $teal:    #20c997 !default;
 $cyan:    #17a2b8 !default;
 
 
-$primary:       $blue !default;
+$primary:       $cat !default;
 $primary-light: lighten($primary, 10%);
 $primary-dark:  darken($primary, 10%);
 
