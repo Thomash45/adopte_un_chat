@@ -1,0 +1,51 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Announce index{% endblock %}
+
+{% block body %}
+    <h1>Announce index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Year</th>
+                <th>Description</th>
+                <th>Adresse</th>
+                <th>City</th>
+                <th>CodePostal</th>
+                <th>Departement</th>
+                <th>Region</th>
+                <th>TelephoneNumber</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for announce in announces %}
+            <tr>
+                <td>{{ announce.id }}</td>
+                <td>{{ announce.name }}</td>
+                <td>{{ announce.year }}</td>
+                <td>{{ announce.description }}</td>
+                <td>{{ announce.adresse }}</td>
+                <td>{{ announce.city }}</td>
+                <td>{{ announce.codePostal }}</td>
+                <td>{{ announce.departement }}</td>
+                <td>{{ announce.region }}</td>
+                <td>{{ announce.telephoneNumber }}</td>
+                <td>
+                    <a href="{{ path('announce_show', {'id': announce.id}) }}">show</a>
+                    <a href="{{ path('announce_edit', {'id': announce.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="11">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('announce_new') }}">Create new</a>
+{% endblock %}
