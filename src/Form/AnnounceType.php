@@ -25,6 +25,7 @@ class AnnounceType extends AbstractType
             ->add('coatColor')
             ->add('coatStyleColor')
             ->add('coat')
+            ->add('devisFile', 'file')
         ;
     }
 

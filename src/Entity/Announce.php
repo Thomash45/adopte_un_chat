@@ -3,9 +3,13 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Vich\UploaderBundle\Entity\File;
+
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\AnnounceRepository")
+ * @Vich\Uploadable
  */
 class Announce
 {
@@ -84,6 +88,27 @@ class Announce
      * @ORM\Column(type="string", length=255)
      */
     private $telephoneNumber;
+
+    /**
+     * @Vich\UploadableField(mapping="announce", fileNameProperty="imgName")
+     *
+     * @var File
+     */
+    private $imgFile;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     *
+     * @var string
+     */
+    private $imgName;
+
+    /**
+     * @ORM\Column(type="datetime")
+     *
+     * @var \DateTime
+     */
+    private $updatedAt;
 
     public function getId()
     {
@@ -244,5 +269,48 @@ class Announce
         $this->telephoneNumber = $telephoneNumber;
 
         return $this;
+    }
+
+    /**
+     * @param File|\Symfony\Component\HttpFoundation\File\UploadedFile $img
+     *
+     * @return Announce
+     */
+    public function setImgFile(File $img = null)
+    {
+        $this->imgFile = $img;
+
+        if ($img)
+            $this->updatedAt = new \DateTimeImmutable();
+
+        return $this;
+    }
+
+    /**
+     * @return File|null
+     */
+    public function getImgFile()
+    {
+        return $this->imgFile;
+    }
+
+    /**
+     * @param string $imgName
+     *
+     * @return Announce
+     */
+    public function setDevisName($devisName)
+    {
+        $this->devisName = $devisName;
+
+        return $this;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getImgName()
+    {
+        return $this->imgName;
     }
 }
