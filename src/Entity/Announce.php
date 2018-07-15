@@ -80,6 +80,11 @@ class Announce
      */
     private $region;
 
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $telephoneNumber;
+
     public function getId()
     {
         return $this->id;
@@ -225,6 +230,18 @@ class Announce
     public function setRegion(?string $region): self
     {
         $this->region = $region;
+
+        return $this;
+    }
+
+    public function getTelephoneNumber(): ?string
+    {
+        return $this->telephoneNumber;
+    }
+
+    public function setTelephoneNumber(string $telephoneNumber): self
+    {
+        $this->telephoneNumber = $telephoneNumber;
 
         return $this;
     }
