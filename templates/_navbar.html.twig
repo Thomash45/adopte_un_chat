@@ -79,11 +79,10 @@
                                 {% endif %}
                                 {% if is_granted('ROLE_USER') %}
 
-                                    <img src="{{ asset('images/chatordi1.png') }}" width="45" height="45" class="ml-3"><span class="ml-3"><b>Espace utilisateur</b></span>
+                                    <img  class="ml-4 "src="{{asset('images/chatordi1.png')}}" width="45px" height="45px"><span class="ml-3"><b>Espace utilisateur</b></span>
                                     <hr class="dropdown-divider">
                                     <a class="dropdown-item" href="">Déposer une nouvelle annonce</a>
                                     <a class="dropdown-item" href="">Voir mes annonces</a>
-                                    <a class="dropdown-item" href="">Modifier mon profil</a>
                                     {% if is_granted('ROLE_ADMIN') %}
                                         <a class="dropdown-item" href="">Valider annonces</a>
                                         <a class="dropdown-item" href="">Créer utilisateurs</a>
@@ -91,9 +90,9 @@
                                         <a class="dropdown-item" href="">Créer articles</a>
                                         <a class="dropdown-item" href="">Editer/Supprimer articles</a>
                                     {% endif %}
+                                    <a class="dropdown-item" href="">Modifier mon profil</a>
                                     <hr class="dropdown-divider">
                                     <a class="btn btn-danger btn-block" href="/logout">Deconnexion</a>
-
                                 {% endif %}
 
                             </div> <!--  dropdown-menu .// -->
