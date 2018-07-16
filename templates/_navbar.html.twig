@@ -22,7 +22,7 @@
             <div class="row align-items-center">
                 <div class="col-lg-3 col-sm-4">
                     <div class="brand-wrap">
-                        <img class="logo" src="images/cat.png">
+                        <img class="logo" src="{{ asset('images/cat.png') }}">
                         <h2 class="logo-text">Le Bon Chat</h2>
                     </div> <!-- brand-wrap.// -->
                 </div>
@@ -72,36 +72,30 @@
                                         <input type="password" id="password" name="_password" class="form-control" />
                                     </div>
                                     <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}"/>
-                                    <button type="submit" class="btn btn-warning">Sign in</button>
+                                    <button type="submit" class="btn btn-warning btn-block">Sign in</button>
                                 </form>
                                     <hr class="dropdown-divider">
                                     <a class="dropdown-item" href="">Créer un compte | Mot de passe oublié</a>
                                 {% endif %}
                                 {% if is_granted('ROLE_USER') %}
 
-                                    <a class="nav-link" href="{{path('index')}}">Espace utilisateur</a>
+                                    <img src="{{ asset('images/chatordi1.png') }}" width="45" height="45" class="ml-3"><span class="ml-3"><b>Espace utilisateur</b></span>
                                     <hr class="dropdown-divider">
                                     <a class="dropdown-item" href="">Déposer une nouvelle annonce</a>
                                     <a class="dropdown-item" href="">Voir mes annonces</a>
                                     <a class="dropdown-item" href="">Modifier mon profil</a>
+                                    {% if is_granted('ROLE_ADMIN') %}
+                                        <a class="dropdown-item" href="">Valider annonces</a>
+                                        <a class="dropdown-item" href="">Créer utilisateurs</a>
+                                        <a class="dropdown-item" href="">Editer/Supprimer utilisateurs</a>
+                                        <a class="dropdown-item" href="">Créer articles</a>
+                                        <a class="dropdown-item" href="">Editer/Supprimer articles</a>
+                                    {% endif %}
                                     <hr class="dropdown-divider">
-                                    <a class="btn btn-danger" href="/logout">Deconnexion</a>
+                                    <a class="btn btn-danger btn-block" href="/logout">Deconnexion</a>
 
                                 {% endif %}
-                                {% if is_granted('ROLE_ADMIN') %}
 
-                                <a class="nav-link" href="{{path('index')}}">Espace admin</a>
-                                <hr class="dropdown-divider">
-                                <a class="dropdown-item" href="">Valider annonces</a>
-                                <a class="dropdown-item" href="">Créer utilisateurs</a>
-                                <a class="dropdown-item" href="">Editer/Supprimer utilisateurs</a>
-                                <a class="dropdown-item" href="">Créer articles</a>
-                                <a class="dropdown-item" href="">Editer/Supprimer articles</a>
-                                <a class="dropdown-item" href="">Modifier mon profil</a>
-                                <hr class="dropdown-divider">
-                                <a class="btn btn-danger" href="/logout">Deconnexion</a>
-
-                                {% endif %}
                             </div> <!--  dropdown-menu .// -->
                         </div>  <!-- widget-header .// -->
                     </div> <!-- widgets-wrap.// -->
