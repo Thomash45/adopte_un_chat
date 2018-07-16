@@ -3,8 +3,7 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use Vich\UploaderBundle\Entity\File;
-
+use Symfony\Component\HttpFoundation\File\File;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
 /**
@@ -90,18 +89,27 @@ class Announce
     private $telephoneNumber;
 
     /**
-     * @Vich\UploadableField(mapping="announce", fileNameProperty="imgName")
+     * NOTE: This is not a mapped field of entity metadata, just a simple property.
+     *
+     * @Vich\UploadableField(mapping="announce_img", fileNameProperty="imageName", size="imageSize")
      *
      * @var File
      */
-    private $imgFile;
+    private $imageFile;
 
     /**
      * @ORM\Column(type="string", length=255)
      *
      * @var string
      */
-    private $imgName;
+    private $imageName;
+
+    /**
+     * @ORM\Column(type="integer")
+     *
+     * @var integer
+     */
+    private $imageSize;
 
     /**
      * @ORM\Column(type="datetime")
@@ -272,45 +280,47 @@ class Announce
     }
 
     /**
-     * @param File|\Symfony\Component\HttpFoundation\File\UploadedFile $img
+     * If manually uploading a file (i.e. not using Symfony Form) ensure an instance
+     * of 'UploadedFile' is injected into this setter to trigger the  update. If this
+     * bundle's configuration parameter 'inject_on_load' is set to 'true' this setter
+     * must be able to accept an instance of 'File' as the bundle will inject one here
+     * during Doctrine hydration.
      *
-     * @return Announce
+     * @param File|\Symfony\Component\HttpFoundation\File\UploadedFile $image
      */
-    public function setImgFile(File $img = null)
+    public function setImageFile(?File $image = null): void
     {
-        $this->imgFile = $img;
+        $this->imageFile = $image;
 
-        if ($img)
+        if (null !== $image) {
+            // It is required that at least one field changes if you are using doctrine
+            // otherwise the event listeners won't be called and the file is lost
             $this->updatedAt = new \DateTimeImmutable();
-
-        return $this;
+        }
     }
 
-    /**
-     * @return File|null
-     */
-    public function getImgFile()
+    public function getImageFile(): ?File
     {
-        return $this->imgFile;
+        return $this->imageFile;
     }
 
-    /**
-     * @param string $imgName
-     *
-     * @return Announce
-     */
-    public function setDevisName($devisName)
+    public function setImageName(?string $imageName): void
     {
-        $this->devisName = $devisName;
-
-        return $this;
+        $this->imageName = $imageName;
     }
 
-    /**
-     * @return string|null
-     */
-    public function getImgName()
+    public function getImageName(): ?string
     {
-        return $this->imgName;
+        return $this->imageName;
+    }
+
+    public function setImageSize(?int $imageSize): void
+    {
+        $this->imageSize = $imageSize;
+    }
+
+    public function getImageSize(): ?int
+    {
+        return $this->imageSize;
     }
 }

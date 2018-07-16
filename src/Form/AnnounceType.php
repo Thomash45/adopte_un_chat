@@ -6,6 +6,8 @@ use App\Entity\Announce;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Vich\UploaderBundle\Form\Type\VichImageType;
+
 
 class AnnounceType extends AbstractType
 {
@@ -25,7 +27,7 @@ class AnnounceType extends AbstractType
             ->add('coatColor')
             ->add('coatStyleColor')
             ->add('coat')
-            ->add('devisFile', 'file')
+            ->add('imageFile', VichImageType::class)
         ;
     }
 

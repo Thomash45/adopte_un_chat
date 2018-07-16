@@ -6,6 +6,12 @@ security:
         database_users:
             entity: { class: App\Entity\User, property: username }
 
+    role_hierarchy:
+
+        # Un admin hérite des droits d'auteur et de modérateur
+
+        ROLE_ADMIN:       [ROLE_USER]
+
     firewalls:
         dev:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
