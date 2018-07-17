@@ -30,12 +30,6 @@ class Announce
     private $year;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Race", inversedBy="announces")
-     * @ORM\JoinColumn(nullable=false)
-     */
-    private $race;
-
-    /**
      * @ORM\ManyToOne(targetEntity="App\Entity\CoatColor", inversedBy="announces")
      * @ORM\JoinColumn(nullable=false)
      */
@@ -134,10 +128,14 @@ class Announce
     private $country;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="announce")
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\Column(type="float", nullable=true)
      */
-    private $user;
+    private $lat;
+
+    /**
+     * @ORM\Column(type="float", nullable=true)
+     */
+    private $lng;
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Gender", inversedBy="announces")
@@ -146,14 +144,17 @@ class Announce
     private $gender;
 
     /**
-     * @ORM\Column(type="float", nullable=true)
+     * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="announces")
+     * @ORM\JoinColumn(nullable=false)
      */
-    private $lat;
+    private $author;
 
     /**
-     * @ORM\Column(type="float", nullable=true)
+     * @ORM\ManyToOne(targetEntity="App\Entity\Race", inversedBy="announces")
+     * @ORM\JoinColumn(nullable=false)
      */
-    private $logt;
+    private $race;
+
 
     public function getId()
     {
@@ -184,17 +185,6 @@ class Announce
         return $this;
     }
 
-    public function getRace(): ?Race
-    {
-        return $this->race;
-    }
-
-    public function setRace(?Race $race): self
-    {
-        $this->race = $race;
-
-        return $this;
-    }
 
     public function getCoatColor(): ?CoatColor
     {
@@ -397,14 +387,26 @@ class Announce
         return $this;
     }
 
-    public function getUser(): ?User
+    public function getLat(): ?float
     {
-        return $this->user;
+        return $this->lat;
     }
 
-    public function setUser(?User $user): self
+    public function setLat(?float $lat): self
     {
-        $this->user = $user;
+        $this->lat = $lat;
+
+        return $this;
+    }
+
+    public function getLng(): ?float
+    {
+        return $this->lng;
+    }
+
+    public function setLng(?float $lng): self
+    {
+        $this->lng = $lng;
 
         return $this;
     }
@@ -421,27 +423,28 @@ class Announce
         return $this;
     }
 
-    public function getLat(): ?float
+    public function getAuthor(): ?User
     {
-        return $this->lat;
+        return $this->author;
     }
 
-    public function setLat(?float $lat): self
+    public function setAuthor(?User $author): self
     {
-        $this->lat = $lat;
+        $this->author = $author;
 
         return $this;
     }
 
-    public function getLogt(): ?float
+    public function getRace(): ?Race
     {
-        return $this->logt;
+        return $this->race;
     }
 
-    public function setLogt(?float $logt): self
+    public function setRace(?Race $race): self
     {
-        $this->logt = $logt;
+        $this->race = $race;
 
         return $this;
     }
+
 }

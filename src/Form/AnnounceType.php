@@ -16,6 +16,7 @@ class AnnounceType extends AbstractType
     {
         $builder
             ->add('name')
+            ->add('gender')
             ->add('year')
             ->add('description')
             ->add('adresse',TextType::class, array('attr' => array('onFocus' => 'geolocate()')))
@@ -23,6 +24,8 @@ class AnnounceType extends AbstractType
             ->add('codePostal',TextType::class, array('attr' => array('disabled' => 'true')))
             ->add('departement',TextType::class, array('attr' => array('disabled' => 'true')))
             ->add('region',TextType::class, array('attr' => array('disabled' => 'true')))
+            ->add('lat')
+            ->add('lng')
             ->add('telephoneNumber')
             ->add('streetNumber')
             ->add('road')

@@ -21,12 +21,7 @@ class Gender
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $male;
-
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private $female;
+    private $name;
 
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\Announce", mappedBy="gender")
@@ -43,29 +38,23 @@ class Gender
         return $this->id;
     }
 
-    public function getMale(): ?string
+    /**
+     * @return mixed
+     */
+    public function getName()
     {
-        return $this->male;
+        return $this->name;
     }
 
-    public function setMale(string $male): self
+    /**
+     * @param mixed $name
+     */
+    public function setName($name): void
     {
-        $this->male = $male;
-
-        return $this;
+        $this->name = $name;
     }
 
-    public function getFemale(): ?string
-    {
-        return $this->female;
-    }
 
-    public function setFemale(string $female): self
-    {
-        $this->female = $female;
-
-        return $this;
-    }
 
     /**
      * @return Collection|Announce[]
@@ -97,4 +86,5 @@ class Gender
 
         return $this;
     }
+
 }

@@ -32,7 +32,7 @@ class AnnounceController extends Controller
         $user = $this->getUser();
         $form = $this->createForm(AnnounceType::class, $announce);
         $form->handleRequest($request);
-        $announce->setUser($user);
+        $announce->setAuthor($user);
 
         if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();

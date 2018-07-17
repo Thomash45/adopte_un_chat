@@ -50,6 +50,10 @@ class Race
         return $this;
     }
 
+    public function __toString() {
+        return $this->name;
+    }
+
     /**
      * @return Collection|Announce[]
      */
@@ -79,9 +83,5 @@ class Race
         }
 
         return $this;
-    }
-
-    public function __toString() {
-        return $this->name;
     }
 }

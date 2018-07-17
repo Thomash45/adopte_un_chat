@@ -67,14 +67,16 @@ class User implements UserInterface, \Serializable
     private $roles = [];
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Announce", mappedBy="user")
+     * @ORM\OneToMany(targetEntity="App\Entity\Announce", mappedBy="author")
      */
-    private $announce;
+    private $announces;
+
 
     public function __construct()
     {
-        $this->announces = new ArrayCollection();
+
         $this->announce = new ArrayCollection();
+        $this->announces = new ArrayCollection();
     }
 
     public function getId(): int
@@ -188,16 +190,16 @@ class User implements UserInterface, \Serializable
     /**
      * @return Collection|Announce[]
      */
-    public function getAnnounce(): Collection
+    public function getAnnounces(): Collection
     {
-        return $this->announce;
+        return $this->announces;
     }
 
     public function addAnnounce(Announce $announce): self
     {
-        if (!$this->announce->contains($announce)) {
-            $this->announce[] = $announce;
-            $announce->setUser($this);
+        if (!$this->announces->contains($announce)) {
+            $this->announces[] = $announce;
+            $announce->setAuthor($this);
         }
 
         return $this;
@@ -205,11 +207,11 @@ class User implements UserInterface, \Serializable
 
     public function removeAnnounce(Announce $announce): self
     {
-        if ($this->announce->contains($announce)) {
-            $this->announce->removeElement($announce);
+        if ($this->announces->contains($announce)) {
+            $this->announces->removeElement($announce);
             // set the owning side to null (unless already changed)
-            if ($announce->getUser() === $this) {
-                $announce->setUser(null);
+            if ($announce->getAuthor() === $this) {
+                $announce->setAuthor(null);
             }
         }
 
