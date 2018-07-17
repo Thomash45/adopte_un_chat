@@ -69,11 +69,12 @@ class User implements UserInterface, \Serializable
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\Announce", mappedBy="user")
      */
-    private $announces;
+    private $announce;
 
     public function __construct()
     {
         $this->announces = new ArrayCollection();
+        $this->announce = new ArrayCollection();
     }
 
     public function getId(): int
@@ -187,15 +188,15 @@ class User implements UserInterface, \Serializable
     /**
      * @return Collection|Announce[]
      */
-    public function getAnnounces(): Collection
+    public function getAnnounce(): Collection
     {
-        return $this->announces;
+        return $this->announce;
     }
 
     public function addAnnounce(Announce $announce): self
     {
-        if (!$this->announces->contains($announce)) {
-            $this->announces[] = $announce;
+        if (!$this->announce->contains($announce)) {
+            $this->announce[] = $announce;
             $announce->setUser($this);
         }
 
@@ -204,8 +205,8 @@ class User implements UserInterface, \Serializable
 
     public function removeAnnounce(Announce $announce): self
     {
-        if ($this->announces->contains($announce)) {
-            $this->announces->removeElement($announce);
+        if ($this->announce->contains($announce)) {
+            $this->announce->removeElement($announce);
             // set the owning side to null (unless already changed)
             if ($announce->getUser() === $this) {
                 $announce->setUser(null);
@@ -214,4 +215,5 @@ class User implements UserInterface, \Serializable
 
         return $this;
     }
+
 }

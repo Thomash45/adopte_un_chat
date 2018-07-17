@@ -13,10 +13,13 @@
     {{ form_row(form.imageFile) }}
 <table id="address">
     {{ form_row(form.adresse) }}
+    {{ form_row(form.road) }}
+    {{ form_row(form.streetNumber) }}
     {{ form_row(form.city) }}
     {{ form_row(form.codePostal) }}
     {{ form_row(form.departement) }}
     {{ form_row(form.region) }}
+    {{ form_row(form.country) }}
 </table>
     <button class="btn">{{ button_label|default('Save') }}</button>
 {{ form_end(form) }}

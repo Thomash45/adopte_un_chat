@@ -10,10 +10,7 @@
     <div class="col-md-4">
     {{ include('announce_user/_form.html.twig') }}
 
-        <input type="hidden" class="field" id="street_number" disabled="true"></input>
-        <input type="hidden"class="field" id="route" disabled="true"></input>
-        <input type="hidden" class="field" id="country" disabled="true"></input></td>
-        </tr>
+
     </div>
     <div class="col-md-4"></div>
 </div>
@@ -25,6 +22,9 @@
     <script>
 
         $('#announce_adresse').attr('id', 'autocomplete');
+        $('#announce_road').attr('id', 'route');
+        $('#announce_streetNumber').attr('id', 'street_number');
+        $('#announce_country').attr('id', 'country');
         $('#announce_city').attr('id', 'locality');
         $('#announce_region').attr('id', 'administrative_area_level_1');
         $('#announce_codePostal').attr('id', 'postal_code');
