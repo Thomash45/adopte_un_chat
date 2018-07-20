@@ -34,6 +34,7 @@ class AnnounceType extends AbstractType
             ->add('coatColor')
             ->add('coatStyleColor')
             ->add('coat')
+            ->add('isPremium')
             ->add('imageFile', VichImageType::class)
         ;
     }

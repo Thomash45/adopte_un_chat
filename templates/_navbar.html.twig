@@ -21,9 +21,9 @@
         <div class="container">
             <div class="row align-items-center">
                 <div class="col-lg-3 col-sm-4">
-                    <div class="brand-wrap">
+                    <div class="brand-wrap"><a href="/">
                         <img class="logo" src="{{ asset('images/cat.png') }}">
-                        <h2 class="logo-text">Le Bon Chat</h2>
+                        <h2 class="logo-text">Le Bon Chat</h2></a>
                     </div> <!-- brand-wrap.// -->
                 </div>
                 <div class="col-lg-4 col-xl-5 col-sm-8">
@@ -75,14 +75,17 @@
                                     <button type="submit" class="btn btn-warning btn-block">Sign in</button>
                                 </form>
                                     <hr class="dropdown-divider">
-                                    <a class="dropdown-item" href="">Créer un compte | Mot de passe oublié</a>
+                                    <div class="col-md-12 text-right textvisible">
+                                        <a class="small" href="{{ path('user_registration') }}">Créer un compte </a>|
+                                        <a class="small" href="#"> Mot de passe oublié</a>
+                                    </div>
                                 {% endif %}
                                 {% if is_granted('ROLE_USER') %}
 
                                     <img  class="ml-4 "src="{{asset('images/chatordi1.png')}}" width="45px" height="45px"><span class="ml-3"><b>Espace utilisateur</b></span>
                                     <hr class="dropdown-divider">
-                                    <a class="dropdown-item" href="">Déposer une nouvelle annonce</a>
-                                    <a class="dropdown-item" href="">Voir mes annonces</a>
+                                    <a class="dropdown-item" href="{{ path('announce_new') }}">Déposer une nouvelle annonce</a>
+                                    <a class="dropdown-item" href="{{ path('announce_index') }}">Voir mes annonces</a>
                                     {% if is_granted('ROLE_ADMIN') %}
                                         <a class="dropdown-item" href="">Valider annonces</a>
                                         <a class="dropdown-item" href="">Créer utilisateurs</a>

@@ -13,27 +13,13 @@ class DefaultController extends Controller
     /**
      * @Route("/", name="index")
      */
-    public function index()
+    public function index(AnnounceRepository $announceRepository): Response
     {
-        return $this->render('index.html.twig');
+        return $this->render('index.html.twig', [
+            'announces' => $announceRepository->findBy(array(), $orderBy = null, $limit = 3, $offset = null),
+            'premium' => $announceRepository->findOneBy(array('is_premium'=>1))
+            ]);
     }
-
-    /**
-     * @Route("/announce", name="announce_show_all", methods="GET")
-     */
-    public function showAllAnnounce(AnnounceRepository $announceRepository): Response
-    {
-        return $this->render('list.html.twig', ['announces' => $announceRepository->findAll()]);
-    }
-
-    /**
-     * @Route("/announce/{id}", name="announce_show_one", methods="GET")
-     */
-    public function showOneAnnounce(Announce $announce): Response
-    {
-        return $this->render('show.html.twig', ['announce' => $announce]);
-    }
-
 
     /**
      * @Route("/admin", name="admin")

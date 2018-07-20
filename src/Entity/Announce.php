@@ -155,6 +155,11 @@ class Announce
      */
     private $race;
 
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private $is_premium;
+
 
     public function getId()
     {
@@ -443,6 +448,18 @@ class Announce
     public function setRace(?Race $race): self
     {
         $this->race = $race;
+
+        return $this;
+    }
+
+    public function getIsPremium(): ?bool
+    {
+        return $this->is_premium;
+    }
+
+    public function setIsPremium(bool $is_premium): self
+    {
+        $this->is_premium = $is_premium;
 
         return $this;
     }

@@ -9,12 +9,12 @@
 
     <div class="col-md-4">
     {{ include('announce_user/_form.html.twig') }}
-
-
     </div>
     <div class="col-md-4"></div>
 </div>
-
+    <div class="row">
+        <div id="map" style="height: 100%; width: 100px;"></div>
+    </div>
 
     <a href="{{ path('announce_index') }}">back to list</a>
 {% endblock %}
@@ -98,9 +98,57 @@
                 });
             }
         }
+
+        /* Déclaration des variables  */
+        var geocoder;
+        var map;
+        var markers = new Array();
+        var i = 0;
+
+        /* Initialisation de la carte  */
+        function initialize() {
+            /* Instanciation du geocoder  */
+            geocoder = new google.maps.Geocoder();
+            var paris = new google.maps.LatLng(48.8566667, 2.3509871);
+            var myOptions = {
+                zoom: 4,
+                center: paris,
+                mapTypeId: google.maps.MapTypeId.HYBRID
+            }
+            /* Chargement de la carte  */
+            map = new google.maps.Map(document.getElementById("map"), myOptions);
+        }
+
+        /* Fonction de géocodage déclenchée en cliquant surle bouton "Geocoder"  */
+        function codeAddress() {
+            /* Récupération de la valeur de l'adresse saisie */
+            var address = document.getElementById("autocomplete").value;
+            /* Appel au service de geocodage avec l'adresse en paramètre */
+            geocoder.geocode( { 'address': address}, function(results, status) {
+                /* Si l'adresse a pu être géolocalisée */
+                if (status == google.maps.GeocoderStatus.OK) {
+                    /* Récupération de sa latitude et de sa longitude */
+                    document.getElementById('lat').value = results[0].geometry.location.lat();
+                    document.getElementById('lng').value = results[0].geometry.location.lng();
+                    map.setCenter(results[0].geometry.location);
+                    /* Affichage du marker */
+                    var marker = new google.maps.Marker({
+                        map: map,
+                        position: results[0].geometry.location
+                    });
+                    /* Permet de supprimer le marker précédemment affiché */
+                    markers.push(marker);
+                    if(markers.length > 1)
+                        markers[(i-1)].setMap(null);
+                    i++;
+                } else {
+                    alert("Le geocodage n\'a pu etre effectue pour la raison suivante: " + status);
+                }
+            });
+        }
     </script>
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAunYqnfgZZ556LQsSqSxNMqtmkqRkfvc8&libraries=places&callback=initAutocomplete"
-            async defer></script>
+
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAunYqnfgZZ556LQsSqSxNMqtmkqRkfvc8&&callback=initMap&&libraries=places&callback=initAutocomplete" async defer></script>
 
 
 {% endblock %}
