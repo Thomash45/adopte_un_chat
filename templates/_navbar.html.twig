@@ -27,17 +27,13 @@
                     </div> <!-- brand-wrap.// -->
                 </div>
                 <div class="col-lg-4 col-xl-5 col-sm-8">
-                    <form action="#" class="search-wrap">
-                        <div class="input-group w-100">
-                            <input type="text" class="form-control" style="width:55%;" placeholder="Je cherche un chat à quel endroit ?">
-                            <div class="input-group-append">
-                                <button class="btn btn-warning" type="submit">
-                                    <i class="fa fa-search"></i>
-                                </button>
-                            </div>
-                        </div>
-                    </form> <!-- search-wrap .end// -->
+                    {{ render(controller(
+
+                        'App\\Controller\\SearchController::searchBar'
+
+                    )) }}
                 </div> <!-- col.// -->
+
                 <div class="col-lg-5 col-xl-4 col-sm-12">
                     <div class="widgets-wrap float-right">
                         <a href="#" class="widget-header mr-3">

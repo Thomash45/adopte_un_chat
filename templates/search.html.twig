@@ -60,25 +60,13 @@
                     <div class="card-body">
                         <div class="row">
                             <aside class="col-sm-3">
-                                <div class="img-wrap"><img src="../images/announce_img/{{ announce.imageName }}"></div>
+                                <a href="{{ path('announce_details', {'id': announce.id}) }}"><div class="img-wrap"><img src="../images/announce_img/{{ announce.imageName }}"></div></a>
                             </aside> <!-- col.// -->
                             <article class="col-sm-6">
-                                <h4 class="title"> {{ announce.name }}  </h4>
+                                <a href="{{ path('announce_details', {'id': announce.id}) }}"><h4 class="title"> {{ announce.name }}  </h4></a>
                                 <div class="rating-wrap  mb-2">
-                                    <ul class="rating-stars">
-                                        <li style="width:80%" class="stars-active">
-                                            <i class="fa fa-star"></i> <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i> <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
-                                        </li>
-                                        <li>
-                                            <i class="fa fa-star"></i> <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i> <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
-                                        </li>
-                                    </ul>
-                                    <div class="label-rating">132 reviews</div>
-                                    <div class="label-rating">154 orders </div>
+
+                                    <i class="fa fa-heart"></i> 0 likes
                                 </div> <!-- rating-wrap.// -->
                                 <p>{{ announce.description }}<br>
 
@@ -102,7 +90,6 @@
                     </div> <!-- card-body .// -->
                 </article> <!-- card product .// -->
     {%  endfor %}
-                .// -->
             </main> <!-- col.// -->
         </div>
 

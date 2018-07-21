@@ -22,6 +22,14 @@ class DefaultController extends Controller
     }
 
     /**
+     * @Route("/{id}", name="announce_details", methods="GET")
+     */
+    public function show(Announce $announce): Response
+    {
+        return $this->render('details.html.twig', ['announce' => $announce]);
+    }
+
+    /**
      * @Route("/admin", name="admin")
      */
     public function admin()
