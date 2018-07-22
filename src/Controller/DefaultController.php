@@ -3,18 +3,21 @@
 namespace App\Controller;
 
 use App\Entity\Announce;
-use App\Repository\AnnounceRepository;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Response;
 
 class DefaultController extends Controller
 {
+
     /**
      * @Route("/", name="index")
      */
-    public function index(AnnounceRepository $announceRepository)
+    public function index()
     {
+
+        $announceRepository = $this->getDoctrine()->getRepository(Announce::class);
+
         return $this->render('index.html.twig', [
             'announces' => $announceRepository->findBy(array(), $orderBy = null, $limit = 3, $offset = null),
             'premium' => $announceRepository->findOneBy(array('is_premium'=>1))
