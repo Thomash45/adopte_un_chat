@@ -13,7 +13,7 @@ class DefaultController extends Controller
     /**
      * @Route("/", name="index")
      */
-    public function index(AnnounceRepository $announceRepository): Response
+    public function index(AnnounceRepository $announceRepository)
     {
         return $this->render('index.html.twig', [
             'announces' => $announceRepository->findBy(array(), $orderBy = null, $limit = 3, $offset = null),

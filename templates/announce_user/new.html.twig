@@ -10,7 +10,10 @@
 
     {{ include('announce_user/_form.html.twig') }}
 
-    <div class="col-md-2"></div>
+    <div class="col-md-2">
+
+
+    </div>
 </div>
 
 
@@ -84,32 +87,9 @@
             }
         }
 
-        // Bias the autocomplete object to the user's geographical location,
-        // as supplied by the browser's 'navigator.geolocation' object.
-        function geolocate() {
-            if (navigator.geolocation) {
-                navigator.geolocation.getCurrentPosition(function(position) {
-                    var geolocation = {
-                        lat: position.coords.latitude,
-                        lng: position.coords.longitude
-                    };
-                    var circle = new google.maps.Circle({
-                        center: geolocation,
-                        radius: position.coords.accuracy
-                    });
-                    autocomplete.setBounds(circle.getBounds());
-                });
-            }
-        }
-        function initMap() {
-            var map = new google.maps.Map(document.getElementById('map'), {
-                center: {lat: -33.8688, lng: 151.2195},
-                zoom: 13
-            })
-        }
     </script>
 
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAunYqnfgZZ556LQsSqSxNMqtmkqRkfvc8&&callback=initMap&&libraries=places&callback=initAutocomplete" async defer></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCfwoJois3eJUbve0k5ojWDqqInpVsm2Rk&&libraries=places&callback=initAutocomplete" async defer></script>
 
 
 {% endblock %}

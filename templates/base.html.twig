@@ -13,7 +13,7 @@
         <link rel="stylesheet" href="{{ asset('build/fonts/fa-regular.css') }}"/>
         <link rel="stylesheet" href="{{ asset('build/fonts/fa-solid.css') }}"/> -->
     </head>
-    <body>
+    <body onload="initialize()">
     {% include '_navbar.html.twig' %}
         {% block body %}{% endblock %}
     {% include '_footer.html.twig' %}

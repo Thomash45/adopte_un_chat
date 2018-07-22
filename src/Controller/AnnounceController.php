@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Announce;
 use App\Form\AnnounceType;
 use App\Repository\AnnounceRepository;
+use App\Service\Geocoder;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -26,16 +27,25 @@ class AnnounceController extends Controller
     /**
      * @Route("/new", name="announce_new", methods="GET|POST")
      */
-    public function new(Request $request): Response
+    public function new(Request $request, Geocoder $geocoder): Response
     {
         $announce = new Announce();
         $user = $this->getUser();
         $form = $this->createForm(AnnounceType::class, $announce);
         $form->handleRequest($request);
         $announce->setAuthor($user);
+        $announce->setIsPremium(false);
+
 
         if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
+
+            $adresse = $form->get('adresse')->getData();
+            $dataGeo = $geocoder->geocodeAddress($adresse);
+
+            $announce->setLat(floatval($dataGeo['lat']));
+            $announce->setLng(floatval($dataGeo['lng']));
+
             $em->persist($announce);
             $em->flush();
 
@@ -63,6 +73,15 @@ class AnnounceController extends Controller
     {
         $form = $this->createForm(AnnounceType::class, $announce);
         $form->handleRequest($request);
+
+        $premium = $announce->getIsPremium();
+
+        if ($premium == true){
+            $announce->setIsPremium(true);
+        }else{
+
+            $announce->setIsPremium(false);
+        }
 
         if ($form->isSubmitted() && $form->isValid()) {
             $this->getDoctrine()->getManager()->flush();

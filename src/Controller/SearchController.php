@@ -44,8 +44,13 @@ class SearchController extends Controller
         //die();
 
         $search = $request->query->get('form')['name'];
-        $announces = $this->getDoctrine()->getRepository(Announce::class)->findBySearchField($search);
-        return $this->render('search.html.twig',['announces' => $announces]);
+        if ($search == ""){
+            return $this->render('search.html.twig');
+        }else{
+            $announces = $this->getDoctrine()->getRepository(Announce::class)->findBySearchField($search);
+            return $this->render('search.html.twig',['announces' => $announces]);
+        }
+
     }
 
 
