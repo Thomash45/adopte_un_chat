@@ -1,0 +1,27 @@
+{{ form_start(form) }}
+    {{ form_errors(form) }}
+    {{ form_row(form.name) }}
+    {{ form_row(form.gender) }}
+    {{ form_row(form.year) }}
+    {{ form_row(form.description) }}
+    {{ form_row(form.isPremium) }}
+    {{ form_row(form.telephoneNumber) }}
+    {{ form_row(form.race) }}
+    {{ form_row(form.coatColor) }}
+    {{ form_row(form.coatStyleColor) }}
+    {{ form_row(form.coat) }}
+    {{ form_row(form.imageFile) }}
+<table id="address">
+    {{ form_row(form.adresse) }}
+    {{ form_row(form.road) }}
+    {{ form_row(form.streetNumber) }}
+    {{ form_row(form.city) }}
+    {{ form_row(form.codePostal) }}
+    {{ form_row(form.departement) }}
+    {{ form_row(form.region) }}
+    {{ form_row(form.country) }}
+    {{ form_row(form.lat) }}
+    {{ form_row(form.lng) }}
+</table>
+    <button class="btn">{{ button_label|default('Save') }}</button>
+{{ form_end(form) }}

@@ -1,31 +1,45 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    {% if error %} <div class="alert alert-danger"> {{ error.messageKey }}</div>
-    {% endif %}
 
-    <div class="row">
-        <div class="col-sm-5">
-            <div class="well">
-                <form action="{{ path('security_login') }}" method="post">
-                    <fieldset>
-                        <legend><i class="fa fa-lock" aria-hidden="true"></i> Connexion</legend>
-                        <div class="form-group">
-                            <label for="username">Username</label>
-                            <input type="text" id="username" name="_username" value="{{ last_username }}" class="form-control"/>
-                        </div>
-                        <div class="form-group">
-                            <label for="password">Mot de passe</label>
-                            <input type="password" id="password" name="_password" class="form-control" />
-                        </div>
-                        <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}"/>
-                        <button type="submit" class="btn btn-primary">
-                            <i class="fa fa-sign-in" aria-hidden="true"></i> On entre
-                        </button>
-                    </fieldset>
-                </form>
-            </div>
-        </div>
+<section class="section-main bg padding-top-sm">
+    <div class="container">
+<div class="row ">
+    <div class="col-sm-4 offset-md-4 pt-lg-5 mb-5">
+    <div class="card">
+        <article class="card-body">
+            <h4 class="card-title mb-4 text-center">Connexion à votre compte</h4>
+            {% if not error %}<div class="text-center mb-3 mt-3"><img src="{{ asset('images/cats.png') }}" width="50%"></div>{% endif %}
+            {% if error %}<div class="text-center mb-3 mt-3"><img src="{{ asset('images/black-cat.png') }}" width="50%"></div>
+             <div class="alert alert-danger"> {{ error.messageKey }}</div>{% endif %}
+
+            <hr>
+            <form action="{{ path('security_login') }}" method="post">
+                <div class="form-group input-icon">
+                    <i class="fa fa-user"></i>
+                    <input class="form-control" placeholder="Nom d'utilisateur" type="text" id="username" name="_username" value="{{ last_username }}">
+                </div> <!-- form-group// -->
+                <div class="form-group input-icon">
+                    <i class="fa fa-lock"></i>
+                    <input class="form-control" placeholder="******" type="password" id="password" name="_password">
+                </div>  <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}"/><!-- form-group// -->
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group align-content-center">
+                            <button type="submit" class="btn btn-primary btn-block "> Connexion </button>
+                        </div> <!-- form-group// -->
+                    </div>
+                    <div class="col-md-12 text-right textvisible">
+                        <a class="small" href="#">Mot de passe oublié ?</a>
+                        <a class="small" href="{{ path('user_registration') }}">Créer un compte</a>
+                    </div>
+                </div> <!-- .row// -->
+            </form>
+        </article>
+    </div> <!-- card.// -->
     </div>
+</div></div>
+        </section>
 
 {% endblock %}
+

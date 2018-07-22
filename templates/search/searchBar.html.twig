@@ -1,0 +1,10 @@
+
+{{ form_start(form,{'attr': {'action' : path('general_search') }}) }}
+    {{ form_errors(form) }}
+<div class="input-group w-100">
+ {{ form_widget(form.name) }}
+<button class="btn btn-warning" type="submit">
+    <i class="fa fa-search"></i>
+</button>
+</div>
+{{ form_end(form) }}

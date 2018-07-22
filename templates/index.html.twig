@@ -3,7 +3,7 @@
 {% block title %}Le Bon Chat{% endblock %}
 
 {% block body %}
-    <section class="section-main bg padding-top-sm">
+    <section class="section-main bg padding-top-sm mb-5">
         <div class="container">
             Annonce à la une
             <div class="row-sm">
@@ -11,16 +11,16 @@
                     <div class="card-body">
                         <div class="row">
                             <aside class="col-sm-3">
-                                <div class="img-wrap"><img src="images/chat/chat1.jpeg"></div>
+                                <div class="img-wrap"><img src="images/announce_img/{{ premium.imageName }}"></div>
                             </aside> <!-- col.// -->
                             <article class="col-sm-6">
-                                <h4 class="title">Nom du chat à la une</h4>
+                                <h4 class="title">{{ premium.name }}</h4>
                                 <div class="rating-wrap  mb-2">
                                     <div class="label-rating"><i class="icon-sm round border fa fa-heart"></i> 132 likes</div>
                                 </div> <!-- rating-wrap.// -->
-                                <p> Lorem ipsum dolor sit amet, consectetuer adipiscing elit, Lorem ipsum dolor sit amet, consectetuer adipiscing elit, Ut wisi enim ad minim veniam </p>
-                                <p><b>Espece : </b> espece <b>Année : </b> année<b> Ville : </b> ville <b>Département : </b> département <br>
-                                    <b>Pelage : </b> espece <b> Motifs : </b> motif<b> Couleur : </b> couleur
+                                <p>{{ premium.description }}</p>
+                                <p><b>Espece : </b> {{ premium.race }} <b>Année : </b> {{ premium.year }}<b> Ville : </b> {{ premium.city }} <b>Département : </b> {{ premium.departement }} <br>
+                                    <b>Pelage : </b> {{ premium.coat }} <b> Motifs : </b> {{ premium.coatStyleColor }}<b> Couleur : </b> {{ premium.coatColor }}
                                 </p>
 
 
@@ -32,37 +32,19 @@
                 <aside class="col-md-4">
 
                     Dernieres annonces
-
-                    <div class="card mb-3">
+    {% for announce in announces %}
+                    <a href="{{ path('announce_details', {'id': announce.id}) }}"><div class="card mb-3">
                         <figure class="itemside">
-                            <div class="aside"><div class="img-wrap border-right"><img src="images/chat/chat3.jpg"></div></div>
+                            <div class="aside"><div class="img-wrap border-right"><img src="images/announce_img/{{ announce.imageName }}"></div></div>
                             <figcaption class="text-wrap align-self-center">
-                                <h6 class="title">Nom du chat</h6>
-                                <a href="#">Voir l'annonce</a>
+                                <h6 class="title">{{ announce.name }}</h6>
+                                <a href="">Voir l'annonce</a>
                             </figcaption>
                         </figure>
-                    </div> <!-- card.// -->
+                        </div></a> <!-- card.// -->
+        {%  endfor %}
 
-                    <div class="card mb-3">
-                        <figure class="itemside">
-                            <div class="aside"><div class="img-wrap border-right"><img src="images/chat/chat4.jpg"></div></div>
-                            <figcaption class="text-wrap align-self-center">
-                                <h6 class="title">Nom du chat</h6>
-                                <a href="#">Voir l'annonce</a>
-                            </figcaption>
-                        </figure>
-                    </div> <!-- card.// -->
-
-                    <div class="card">
-                        <figure class="itemside">
-                            <div class="aside"><div class="img-wrap border-right"><img src="images/chat/chat5.jpg"></div></div>
-                            <figcaption class="text-wrap align-self-center">
-                                <h6 class="title">Nom du chat</h6>
-                                <a href="#">Voir l'annonce</a>
-                            </figcaption>
-                        </figure>
-                    </div> <!-- card.// -->
-
+                  <a href="{{ path('announce_findall') }}" class="btn btn-primary btn-block btn-lg">Voir toutes les annonces</a>
                 </aside>
 
                 <aside  class="col-md-4">
@@ -71,7 +53,7 @@
                         <img class="card-img-top" src="images/chat/accueil.jpg" alt="Card image cap">
                         <div class="card-body">
                             <h5 class="card-title">Accueillir son nouveau compagnon</h5>
-                            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+
                             <p class="card-text"><small class="text-muted">Date de l'article</small></p>
                         </div>
                     </div>  <!-- card.// -->
@@ -84,7 +66,7 @@
                         <img class="card-img-top" src="images/chat/toilette.jpeg" alt="Card image cap">
                         <div class="card-body">
                             <h5 class="card-title">Bien s'occuper de son chat</h5>
-                            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+
                             <p class="card-text"><small class="text-muted">Date de l'article</small></p>
                         </div>
                     </div>  <!-- card.// -->

@@ -1,0 +1,98 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+<section class="section-content bg padding-y">
+    <div class="container">
+
+        <div class="row">
+            <aside class="col-sm-3">
+
+                <div class="card card-filter">
+                    <article class="card-group-item">
+                        <header class="card-header">
+                            <a class="" aria-expanded="true" href="#" data-toggle="collapse" data-target="#collapse22">
+                                <i class="icon-action fa fa-chevron-down"></i>
+                                <h6 class="title">Par Espèces</h6>
+                            </a>
+                        </header>
+                        <div style="" class="filter-content collapse show" id="collapse22">
+                            <div class="card-body">
+                                <form class="pb-3">
+                                    <div class="input-group">
+                                        <input class="form-control" placeholder="Search" type="text">
+                                        <div class="input-group-append">
+                                            <button class="btn btn-primary" type="button"><i class="fa fa-search"></i></button>
+                                        </div>
+                                    </div>
+                                </form>
+
+                                <ul class="list-unstyled list-lg">
+
+                                </ul>
+                            </div> <!-- card-body.// -->
+                        </div> <!-- collapse .// -->
+                    </article> <!-- card-group-item.// -->
+                    <article class="card-group-item">
+                        <header class="card-header">
+                            <a href="#" data-toggle="collapse" data-target="#collapse33">
+                                <i class="icon-action fa fa-chevron-down"></i>
+                                <h6 class="title">Par Couleur  </h6>
+                            </a>
+                        </header>
+                    </article> <!-- card-group-item.// -->
+                    <article class="card-group-item">
+                        <header class="card-header">
+                            <a href="#" data-toggle="collapse" data-target="#collapse44">
+                                <i class="icon-action fa fa-chevron-down"></i>
+                                <h6 class="title">Par Fourrure </h6>
+                            </a>
+                        </header>
+
+                    </article> <!-- card-group-item.// -->
+                </div> <!-- card.// -->
+
+
+            </aside> <!-- col.// -->
+            <main class="col-sm-9">
+
+    {% for announce in announces %}
+                <article class="card card-product">
+                    <div class="card-body">
+                        <div class="row">
+                            <aside class="col-sm-3">
+                                <a href="{{ path('announce_details', {'id': announce.id}) }}"><div class="img-wrap"><img src="../images/announce_img/{{ announce.imageName }}"></div></a>
+                            </aside> <!-- col.// -->
+                            <article class="col-sm-6">
+                                <a href="{{ path('announce_details', {'id': announce.id}) }}"><h4 class="title"> {{ announce.name }}  </h4></a>
+                                <div class="rating-wrap  mb-2">
+
+                                    <i class="fa fa-heart"></i> 0 likes
+                                </div> <!-- rating-wrap.// -->
+                                <p>{{ announce.description }}<br>
+
+                                    <b>Pelage : </b> {{ announce.coat }} <b> Motifs : </b> {{ announce.coatStyleColor }}<b> Couleur : </b> {{ announce.coatColor }}
+                                </p>
+
+                            </article> <!-- col.// -->
+                            <aside class="col-sm-3 border-left">
+                                <div class="action-wrap">
+
+                                   <b>Espece : </b> {{ announce.race }} <br><b>Année : </b> {{ announce.year }}<br><b> Ville : </b> {{ announce.city }} <br><b>Département : </b> {{ announce.departement }}
+
+
+                                        <a href="#" class="btn btn-primary btn-block mb-2 mt-2" > <i class="fa fa-heart"></i> Ajouter à mes favoris </a>
+                                        <a href="#" class="btn btn-secondary btn-block "> Details  </a>
+                                    </p>
+
+                                </div> <!-- action-wrap.// -->
+                            </aside> <!-- col.// -->
+                        </div> <!-- row.// -->
+                    </div> <!-- card-body .// -->
+                </article> <!-- card product .// -->
+    {%  endfor %}
+            </main> <!-- col.// -->
+        </div>
+
+    </div> <!-- container .//  -->
+</section>
+{% endblock %}

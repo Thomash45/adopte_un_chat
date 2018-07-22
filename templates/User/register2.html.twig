@@ -17,7 +17,7 @@
                             <p class="divider-text">
                                 <span>Remplir le formulaire</span>
                             </p>
-                            {{ form_start(form) }}
+                            <form action="{{ path('user_registration') }}" method="post">
                                 <div class="form-group input-group">
                                     <div class="input-group-prepend">
                                         <span class="input-group-text"> <i class="fa fa-user"></i> </span>
@@ -60,9 +60,9 @@
                                     <button type="submit" class="btn btn-primary btn-block"> Créer un compte</button>
                                 </div> <!-- form-group// -->
                                 <p class="text-center textvisible">Déja un compte ? <a href="/login">Log In</a> </p>
-                            {{ form_end(form) }}
+                            </form>
                         </article>
                     </div></div></div></div></section>
 
-
+    {{ form_end(form) }}
 {% endblock %}

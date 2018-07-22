@@ -7,9 +7,9 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity(repositoryClass="App\Repository\RaceRepository")
+ * @ORM\Entity(repositoryClass="App\Repository\GenderRepository")
  */
-class Race
+class Gender
 {
     /**
      * @ORM\Id()
@@ -24,7 +24,7 @@ class Race
     private $name;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Announce", mappedBy="race")
+     * @ORM\OneToMany(targetEntity="App\Entity\Announce", mappedBy="gender")
      */
     private $announces;
 
@@ -38,21 +38,26 @@ class Race
         return $this->id;
     }
 
-    public function getName(): ?string
+    /**
+     * @return mixed
+     */
+    public function getName()
     {
         return $this->name;
     }
 
-    public function setName(string $name): self
+    /**
+     * @param mixed $name
+     */
+    public function setName($name): void
     {
         $this->name = $name;
-
-        return $this;
     }
 
     public function __toString() {
         return $this->name;
     }
+
 
     /**
      * @return Collection|Announce[]
@@ -66,7 +71,7 @@ class Race
     {
         if (!$this->announces->contains($announce)) {
             $this->announces[] = $announce;
-            $announce->setRace($this);
+            $announce->setGender($this);
         }
 
         return $this;
@@ -77,11 +82,12 @@ class Race
         if ($this->announces->contains($announce)) {
             $this->announces->removeElement($announce);
             // set the owning side to null (unless already changed)
-            if ($announce->getRace() === $this) {
-                $announce->setRace(null);
+            if ($announce->getGender() === $this) {
+                $announce->setGender(null);
             }
         }
 
         return $this;
     }
+
 }

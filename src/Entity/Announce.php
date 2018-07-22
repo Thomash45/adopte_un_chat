@@ -30,12 +30,6 @@ class Announce
     private $year;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Race", inversedBy="announces")
-     * @ORM\JoinColumn(nullable=false)
-     */
-    private $race;
-
-    /**
      * @ORM\ManyToOne(targetEntity="App\Entity\CoatColor", inversedBy="announces")
      * @ORM\JoinColumn(nullable=false)
      */
@@ -118,6 +112,55 @@ class Announce
      */
     private $updatedAt;
 
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $streetNumber;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $road;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $country;
+
+    /**
+     * @ORM\Column(type="float", nullable=true)
+     */
+    private $lat;
+
+    /**
+     * @ORM\Column(type="float", nullable=true)
+     */
+    private $lng;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Gender", inversedBy="announces")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $gender;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="announces")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $author;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Race", inversedBy="announces")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $race;
+
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private $is_premium;
+
+
     public function getId()
     {
         return $this->id;
@@ -147,17 +190,6 @@ class Announce
         return $this;
     }
 
-    public function getRace(): ?Race
-    {
-        return $this->race;
-    }
-
-    public function setRace(?Race $race): self
-    {
-        $this->race = $race;
-
-        return $this;
-    }
 
     public function getCoatColor(): ?CoatColor
     {
@@ -323,4 +355,113 @@ class Announce
     {
         return $this->imageSize;
     }
+
+    public function getStreetNumber(): ?string
+    {
+        return $this->streetNumber;
+    }
+
+    public function setStreetNumber(?string $streetNumber): self
+    {
+        $this->streetNumber = $streetNumber;
+
+        return $this;
+    }
+
+    public function getRoad(): ?string
+    {
+        return $this->road;
+    }
+
+    public function setRoad(?string $road): self
+    {
+        $this->road = $road;
+
+        return $this;
+    }
+
+    public function getCountry(): ?string
+    {
+        return $this->country;
+    }
+
+    public function setCountry(?string $country): self
+    {
+        $this->country = $country;
+
+        return $this;
+    }
+
+    public function getLat(): ?float
+    {
+        return $this->lat;
+    }
+
+    public function setLat(?float $lat): self
+    {
+        $this->lat = $lat;
+
+        return $this;
+    }
+
+    public function getLng(): ?float
+    {
+        return $this->lng;
+    }
+
+    public function setLng(?float $lng): self
+    {
+        $this->lng = $lng;
+
+        return $this;
+    }
+
+    public function getGender(): ?Gender
+    {
+        return $this->gender;
+    }
+
+    public function setGender(?Gender $gender): self
+    {
+        $this->gender = $gender;
+
+        return $this;
+    }
+
+    public function getAuthor(): ?User
+    {
+        return $this->author;
+    }
+
+    public function setAuthor(?User $author): self
+    {
+        $this->author = $author;
+
+        return $this;
+    }
+
+    public function getRace(): ?Race
+    {
+        return $this->race;
+    }
+
+    public function setRace(?Race $race): self
+    {
+        $this->race = $race;
+
+        return $this;
+    }
+
+    public function getIsPremium(): ?bool
+    {
+        return $this->is_premium;
+    }
+
+    public function setIsPremium(bool $is_premium): self
+    {
+        $this->is_premium = $is_premium;
+
+        return $this;
+    }
+
 }

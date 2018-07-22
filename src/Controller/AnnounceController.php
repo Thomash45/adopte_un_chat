@@ -20,7 +20,7 @@ class AnnounceController extends Controller
      */
     public function index(AnnounceRepository $announceRepository): Response
     {
-        return $this->render('announce/index.html.twig', ['announces' => $announceRepository->findAll()]);
+        return $this->render('announce_user/index.html.twig', ['announces' => $announceRepository->findAll()]);
     }
 
     /**
@@ -29,8 +29,10 @@ class AnnounceController extends Controller
     public function new(Request $request): Response
     {
         $announce = new Announce();
+        $user = $this->getUser();
         $form = $this->createForm(AnnounceType::class, $announce);
         $form->handleRequest($request);
+        $announce->setAuthor($user);
 
         if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
@@ -40,7 +42,7 @@ class AnnounceController extends Controller
             return $this->redirectToRoute('announce_index');
         }
 
-        return $this->render('announce/new.html.twig', [
+        return $this->render('announce_user/new.html.twig', [
             'announce' => $announce,
             'form' => $form->createView(),
         ]);
@@ -51,7 +53,7 @@ class AnnounceController extends Controller
      */
     public function show(Announce $announce): Response
     {
-        return $this->render('announce/show.html.twig', ['announce' => $announce]);
+        return $this->render('announce_user/show.html.twig', ['announce' => $announce]);
     }
 
     /**
@@ -68,7 +70,7 @@ class AnnounceController extends Controller
             return $this->redirectToRoute('announce_edit', ['id' => $announce->getId()]);
         }
 
-        return $this->render('announce/edit.html.twig', [
+        return $this->render('announce_user/edit.html.twig', [
             'announce' => $announce,
             'form' => $form->createView(),
         ]);
