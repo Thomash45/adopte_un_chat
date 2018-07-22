@@ -1,18 +1,82 @@
+<div class="col-md-8">
+
 {{ form_start(form) }}
     {{ form_errors(form) }}
-    {{ form_row(form.name) }}
-    {{ form_row(form.gender) }}
-    {{ form_row(form.year) }}
-    {{ form_row(form.description) }}
-    {{ form_row(form.isPremium) }}
-    {{ form_row(form.telephoneNumber) }}
-    {{ form_row(form.race) }}
-    {{ form_row(form.coatColor) }}
-    {{ form_row(form.coatStyleColor) }}
-    {{ form_row(form.coat) }}
-    {{ form_row(form.imageFile) }}
+
+
+
+
+
+
+
+
+
 <table id="address">
-    {{ form_row(form.adresse) }}
+
+
+
+</table>
+
+
+
+<div class="card">
+    <header class="card-header">
+        <h4 class="card-title mt-2">Poster une annonce</h4>
+    </header>
+    <article class="card-body">
+        <form>
+            <div class="row">
+                <div class="col-md-6">
+            <div class="form-row">
+                <div class="col form-group">
+                    {{ form_row(form.name) }}
+                </div> <!-- form-group end.// -->
+                <div class="col form-group">
+                    {{ form_row(form.gender) }}
+                </div> <!-- form-group end.// -->
+            </div> <!-- form-row end.// -->
+            <div class="form-row">
+                <div class="col form-group">
+                    {{ form_row(form.year) }}
+                </div> <!-- form-group end.// -->
+                <div class="col form-group">
+                    {{ form_row(form.race) }}
+                </div> <!-- form-group end.// -->
+            </div> <!-- form-row end.// -->
+            <div class="form-row">
+                <div class="col form-group">
+                    {{ form_row(form.coat) }}
+                </div> <!-- form-group end.// -->
+                <div class="col form-group">
+                    {{ form_row(form.coatStyleColor) }}
+                </div> <!-- form-group end.// --><div class="col form-group">
+                    {{ form_row(form.coatColor) }}
+                </div> <!-- form-group end.// -->
+            </div> <!-- form-row end.// -->
+            <div class="form-group">
+                {{ form_row(form.description) }}
+            </div>
+            <div class="form-row">
+                <div class="col form-group">
+
+                    {{ form_row(form.imageFile) }}
+
+                </div> <!-- form-group end.// -->
+            </div> <!-- form-row end.// -->
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        {{ form_row(form.adresse) }}
+                    </div> <!-- form-group end.// -->
+                    <div class="form-group" id="map">
+
+                    </div> <!-- form-group end.// -->
+                </div>
+            </div>
+        </form>
+    </article> <!-- card-body end .// -->
+    <div class="border-top card-body text-center">Have an account? <a href="">Log In</a></div>
+</div>
     {{ form_row(form.road) }}
     {{ form_row(form.streetNumber) }}
     {{ form_row(form.city) }}
@@ -22,6 +86,7 @@
     {{ form_row(form.country) }}
     {{ form_row(form.lat) }}
     {{ form_row(form.lng) }}
-</table>
     <button class="btn">{{ button_label|default('Save') }}</button>
 {{ form_end(form) }}
+
+</div>

@@ -4,6 +4,8 @@ namespace App\Form;
 
 use App\Entity\Announce;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
+use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -20,21 +22,20 @@ class AnnounceType extends AbstractType
             ->add('year')
             ->add('description')
             ->add('adresse',TextType::class, array('attr' => array('onFocus' => 'geolocate()')))
-            ->add('city',TextType::class, array('attr' => array('disabled' => 'true')))
-            ->add('codePostal',TextType::class, array('attr' => array('disabled' => 'true')))
-            ->add('departement',TextType::class, array('attr' => array('disabled' => 'true')))
-            ->add('region',TextType::class, array('attr' => array('disabled' => 'true')))
+            ->add('city',HiddenType::class, array('attr' => array('disabled' => 'true')))
+            ->add('codePostal',HiddenType::class, array('attr' => array('disabled' => 'true')))
+            ->add('departement',HiddenType::class, array('attr' => array('disabled' => 'true')))
+            ->add('region',HiddenType::class, array('attr' => array('disabled' => 'true')))
             ->add('lat')
             ->add('lng')
             ->add('telephoneNumber')
-            ->add('streetNumber')
-            ->add('road')
-            ->add('country')
+            ->add('streetNumber',HiddenType::class)
+            ->add('road',HiddenType::class)
+            ->add('country',HiddenType::class)
             ->add('race')
             ->add('coatColor')
             ->add('coatStyleColor')
             ->add('coat')
-            ->add('isPremium')
             ->add('imageFile', VichImageType::class)
         ;
     }
