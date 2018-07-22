@@ -15,7 +15,6 @@ class DefaultController extends Controller
      */
     public function index()
     {
-
         $announceRepository = $this->getDoctrine()->getRepository(Announce::class);
 
         return $this->render('index.html.twig', [
