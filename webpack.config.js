@@ -14,6 +14,7 @@ Encore
     .addEntry('js/bootstrap', './assets/js/bootstrap.bundle.min.js')
     .addEntry('js/jquery', './assets/js/jquery-2.0.0.min.js')
     .addEntry('js/script', './assets/js/script.js')
+    .addEntry('js/completion', './assets/js/completion.js')
     //.addStyleEntry('css/bootstrap', './assets/css/bootstrap-custom.scss')
     //.addStyleEntry('css/responsive', './assets/css/responsive.scss')
     //.addStyleEntry('css/uikit', './assets/css/uikit.scss')
