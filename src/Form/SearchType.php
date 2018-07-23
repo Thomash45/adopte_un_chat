@@ -17,7 +17,13 @@ class SearchType extends AbstractType
     {
         $builder
             ->setMethod('GET')
-            ->add('name', TextType::class);
+            ->add('adresse',TextType::class, array('attr' => array('onFocus' => 'geolocate()')))
+            ->add('city',HiddenType::class, array('attr' => array('disabled' => 'true')))
+            ->add('codePostal',HiddenType::class, array('attr' => array('disabled' => 'true')))
+            ->add('departement',HiddenType::class, array('attr' => array('disabled' => 'true')))
+            ->add('region',HiddenType::class, array('attr' => array('disabled' => 'true')));
+
+
     }
 
     public function configureOptions(OptionsResolver $resolver)

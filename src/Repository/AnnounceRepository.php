@@ -22,15 +22,43 @@ class AnnounceRepository extends ServiceEntityRepository
     /**
      * @return Announce[] Returns an array of Announce objects
      */
-    public function findBySearchField($value)
+    public function findBySearchCity($value)
     {
         return $this->createQueryBuilder('a')
-            ->andWhere('a.name = :val')
+            ->andWhere('a.city = :val')
             ->setParameter('val', $value)
             ->orderBy('a.id', 'ASC')
             ->getQuery()
             ->getResult()
         ;
+    }
+
+    /**
+     * @return Announce[] Returns an array of Announce objects
+     */
+    public function findBySearchDep($value)
+    {
+        return $this->createQueryBuilder('a')
+            ->andWhere('a.departement = :val')
+            ->setParameter('val', $value)
+            ->orderBy('a.id', 'ASC')
+            ->getQuery()
+            ->getResult()
+            ;
+    }
+
+    /**
+     * @return Announce[] Returns an array of Announce objects
+     */
+    public function findBySearchRegion($value)
+    {
+        return $this->createQueryBuilder('a')
+            ->andWhere('a.region = :val')
+            ->setParameter('val', $value)
+            ->orderBy('a.id', 'ASC')
+            ->getQuery()
+            ->getResult()
+            ;
     }
 
 
