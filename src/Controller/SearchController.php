@@ -3,8 +3,10 @@
 namespace App\Controller;
 
 use App\Entity\Announce;
+use App\Entity\Race;
 use App\Form\AnnounceType;
 use App\Repository\AnnounceRepository;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -28,6 +30,7 @@ class SearchController extends Controller
     public function searchBar()
     {
 
+
         $form = $this->createFormBuilder(null)
             ->setMethod('GET')
             ->add('adresse',TextType::class, array('attr' => array('onFocus' => 'geolocate()')))
@@ -38,7 +41,12 @@ class SearchController extends Controller
             ->add('streetNumber',HiddenType::class)
             ->add('road',HiddenType::class)
             ->add('country',HiddenType::class)
+            ->add('race', EntityType::class, array(
+                // looks for choices from this entity
+                'class' => Race::class,
+                ))
             ->getForm();
+
 
         return $this->render('search/searchBar.html.twig', ['form'=>$form->createView()]);
     }
@@ -65,18 +73,18 @@ class SearchController extends Controller
             $searchRegion = "";
         }
 
-        if ($searchCity != ""){
-            $announces = $this->getDoctrine()->getRepository(Announce::class)->findBySearchCity($searchCity);
-            return $this->render('search.html.twig',['announces' => $announces,'search' => $searchCity]);
-        }elseif ($searchDepartement != ""){
-            $announces = $this->getDoctrine()->getRepository(Announce::class)->findBySearchDep($searchDepartement);
-            return $this->render('search.html.twig',['announces' => $announces,'search' => $searchDepartement]);
-        }elseif ($searchRegion != ""){
-            $announces = $this->getDoctrine()->getRepository(Announce::class)->findBySearchRegion($searchRegion);
-            return $this->render('search.html.twig',['announces' => $announces,'search' => $searchRegion]);
+        if (isset($request->query->get('form')['race'])){
+            $searchRace = $request->query->get('form')['race'];
         }else{
-            return $this->redirectToRoute('index');
+            $searchRace = "";
         }
+
+
+        $infoSearchs =[$searchRace,$searchCity,$searchDepartement,$searchRegion];
+
+        $announces = $this->getDoctrine()->getRepository(Announce::class)->findBySearchGlobal($searchCity,$searchDepartement,$searchRegion,$searchRace);
+            return $this->render('search.html.twig',['announces' => $announces,'infoSearchs' => $infoSearchs]);
+
 
     }
 

@@ -36,7 +36,6 @@ class AnnounceController extends Controller
         $announce->setAuthor($user);
         $announce->setIsPremium(false);
 
-
         if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
 

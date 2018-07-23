@@ -3,10 +3,8 @@
 {% block body %}
 <section class="section-content bg padding-y">
     <div class="container">
-
         <div class="row">
             <aside class="col-sm-3">
-
                 <div class="card card-filter">
                     <article class="card-group-item">
                         <header class="card-header">
@@ -25,9 +23,7 @@
                                         </div>
                                     </div>
                                 </form>
-
                                 <ul class="list-unstyled list-lg">
-
                                 </ul>
                             </div> <!-- card-body.// -->
                         </div> <!-- collapse .// -->
@@ -47,17 +43,20 @@
                                 <h6 class="title shadow-text">Par Fourrure </h6>
                             </a>
                         </header>
-
                     </article> <!-- card-group-item.// -->
                 </div> <!-- card.// -->
-
-
             </aside> <!-- col.// -->
             <main class="col-sm-9">
-                <h4>{{ announces|length }} résultats  {% if search is defined %}
-                    pour " {{ search }} "
-                    {% endif %}</h4>
-    {% for announce in announces %}
+                <h4>{{ announces|length }} résultats
+                    {% if infoSearchs.0 != ""%}
+                        pour " {{ infoSearchs.0 }} "
+                    {% elseif infoSearchs.1 != "" %}
+                        pour " {{ infoSearchs.1 }} "
+                    {% elseif infoSearchs.2 != "" %}
+                        pour " {{ infoSearchs.2 }} "
+                    {% endif %}
+                    </h4>
+            {% for announce in announces %}
                 <article class="card card-product">
                     <div class="card-body">
                         <div class="row">
@@ -71,30 +70,23 @@
                                     <i class="fa fa-heart"></i> 0 likes
                                 </div> <!-- rating-wrap.// -->
                                 <p>{{ announce.description }}<br>
-
                                     <b>Pelage : </b> {{ announce.coat }} <b> Motifs : </b> {{ announce.coatStyleColor }}<b> Couleur : </b> {{ announce.coatColor }}
                                 </p>
-
                             </article> <!-- col.// -->
                             <aside class="col-sm-3 border-left">
                                 <div class="action-wrap">
-
                                    <b>Espece : </b> {{ announce.race }} <br><b>Année : </b> {{ announce.year }}<br><b> Ville : </b> {{ announce.city }} <br><b>Département : </b> {{ announce.departement }}
-
-
                                         <a href="#" class="btn btn-primary btn-block mb-2 mt-2" > <i class="fa fa-heart"></i> Ajouter à mes favoris </a>
                                         <a href="#" class="btn btn-secondary btn-block "> Details  </a>
                                     </p>
-
                                 </div> <!-- action-wrap.// -->
                             </aside> <!-- col.// -->
                         </div> <!-- row.// -->
                     </div> <!-- card-body .// -->
                 </article> <!-- card product .// -->
-    {%  endfor %}
+            {%  endfor %}
             </main> <!-- col.// -->
         </div>
-
     </div> <!-- container .//  -->
 </section>
 {% endblock %}

@@ -22,46 +22,34 @@ class AnnounceRepository extends ServiceEntityRepository
     /**
      * @return Announce[] Returns an array of Announce objects
      */
-    public function findBySearchCity($value)
+    public function findBySearchGlobal($city,$dep,$reg,$race)
     {
+        if ($city != ""){
+            $key = 'city';
+            $val = $city;
+        }elseif ($dep != ""){
+            $key = 'departement';
+            $val = $dep;
+        }else{
+            $key = 'region';
+            $val = $reg;
+        }
+
+        if ($race != "") {
+            $keyrace = 'race';
+            $valrace = $race;
+        }
+
         return $this->createQueryBuilder('a')
-            ->andWhere('a.city = :val')
-            ->setParameter('val', $value)
+            ->andWhere('a.'.$key.' = :val')
+            ->andWhere('a.'.$keyrace.' = :valrace')
+            ->setParameter('val', $val)
+            ->setParameter('valrace', $race)
             ->orderBy('a.id', 'ASC')
             ->getQuery()
             ->getResult()
         ;
     }
-
-    /**
-     * @return Announce[] Returns an array of Announce objects
-     */
-    public function findBySearchDep($value)
-    {
-        return $this->createQueryBuilder('a')
-            ->andWhere('a.departement = :val')
-            ->setParameter('val', $value)
-            ->orderBy('a.id', 'ASC')
-            ->getQuery()
-            ->getResult()
-            ;
-    }
-
-    /**
-     * @return Announce[] Returns an array of Announce objects
-     */
-    public function findBySearchRegion($value)
-    {
-        return $this->createQueryBuilder('a')
-            ->andWhere('a.region = :val')
-            ->setParameter('val', $value)
-            ->orderBy('a.id', 'ASC')
-            ->getQuery()
-            ->getResult()
-            ;
-    }
-
-
 
 
     /*

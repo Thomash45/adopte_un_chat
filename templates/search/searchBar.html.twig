@@ -1,8 +1,10 @@
 
 {{ form_start(form,{'attr': {'action' : path('general_search') }}) }}
     {{ form_errors(form) }}
-<div class="input-group w-100">
- {{ form_widget(form.adresse,{'attr': {'placeholder' : 'Entrer une ville, un département ou une région' }}) }}
+<div class="input-group w-100 ml-5">
+
+ {{ form_widget(form.adresse,{'attr': {'placeholder' : 'Entrer une ville, un département ou une région','style' : 'width:55%;' }}) }}
+    {{ form_widget(form.race) }}
 <button class="btn btn-warning" type="submit">
     <i class="fa fa-search"></i>
 </button>
