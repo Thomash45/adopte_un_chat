@@ -14,12 +14,13 @@
         <link rel="stylesheet" href="{{ asset('build/fonts/fa-solid.css') }}"/> -->
     </head>
     <body onload="initialize()">
-    {% include '_navbarlog.html.twig' %}
+    {% include '_navbar.html.twig' %}
         {% block body %}{% endblock %}
     {% include '_footer.html.twig' %}
     <script type="text/javascript" src="{{ asset('build/js/bootstrap.js') }}"></script>
     <script type="text/javascript" src="{{ asset('build/js/jquery.js') }}"></script>
     <script type="text/javascript" src="{{ asset('build/js/script.js') }}"></script>
+
         {% block javascripts %}{% endblock %}
     </body>
 </html>

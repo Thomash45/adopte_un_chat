@@ -1,13 +1,23 @@
 <div class="col-md-8">
-<div class="card">
-    <header class="card-header">
-        <h4 class="card-title mt-2">Poster une annonce</h4>
+<div class="card mt-5 mb-5">
+    <header class="card-header ">
+        {{ form_start(form) }}
+        {{ form_errors(form) }}
+        <button class="btn btn-primary mb-2 mt-2 pull-right"><i class="fa fa-paper-plane"> </i> {{ button_label|default('Envoyer mon Annonce') }}</button>
     </header>
     <article class="card-body">
         {{ form_start(form) }}
         {{ form_errors(form) }}
             <div class="row">
                 <div class="col-md-6">
+                    <div class="form-row">
+                        <div class="col form-group">
+                            {{ form_row(form.adresse) }}
+                        </div> <!-- form-group end.// -->
+                        <div class="col form-group">
+                            {{ form_row(form.telephoneNumber) }}
+                        </div> <!-- form-group end.// -->
+                    </div> <!-- form-row end.// -->
             <div class="form-row">
                 <div class="col form-group">
                     {{ form_row(form.name) }}
@@ -37,24 +47,22 @@
             <div class="form-group">
                 {{ form_row(form.description) }}
             </div>
-            <div class="form-row">
-                <div class="col form-group">
 
-                    {{ form_row(form.imageFile) }}
+        </div>
+                <div class="col-md-6 border border-warning border-top-0 border-right-0 border-bottom-0">
+                    <div class="form-row">
+                        <div class="col form-group">
 
-                </div> <!-- form-group end.// -->
-            </div> <!-- form-row end.// -->
-                </div>
-                <div class="col-md-6">
-                    <div class="form-group">
-                        {{ form_row(form.adresse) }}
-                    </div> <!-- form-group end.// -->
-                    <div class="form-group" id="map">
-                    </div> <!-- form-group end.// -->
+                            {{ form_row(form.imageFile) }}
+
+                            <div class="text-center border border-warning p-2"><img id="preview" src="{{ asset('images/catupload.png') }}" alt="" width="380px"  /></div>
+
+                        </div> <!-- form-group end.// -->
+                    </div> <!-- form-row end.// -->
+
                 </div>
             </div>
     </article> <!-- card-body end .// -->
-    <div class="border-top card-body text-center">Have an account? <a href="">Log In</a></div>
 </div>
     {{ form_row(form.road) }}
     {{ form_row(form.streetNumber) }}
@@ -63,9 +71,8 @@
     {{ form_row(form.departement) }}
     {{ form_row(form.region) }}
     {{ form_row(form.country) }}
-    {{ form_row(form.lat) }}
-    {{ form_row(form.lng) }}
-    <button class="btn">{{ button_label|default('Save') }}</button>
+
+
 {{ form_end(form) }}
 
 </div>

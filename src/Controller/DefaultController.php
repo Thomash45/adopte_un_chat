@@ -6,6 +6,7 @@ use App\Entity\Announce;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Yaml\Tests\A;
 
 class DefaultController extends Controller
 {
@@ -24,12 +25,28 @@ class DefaultController extends Controller
     }
 
     /**
-     * @Route("/{id}", name="announce_details", methods="GET")
+     * @Route("/details/{id}", name="announce_details")
      */
-    public function show(Announce $announce): Response
+       public function show($id)
     {
+        $announce = $this->getDoctrine()
+            ->getRepository(Announce::class)
+            ->find($id);
+
+        if (!$announce) {
+            throw $this->createNotFoundException(
+                'No product found for id '.$id
+            );
+        }
+
         return $this->render('details.html.twig', ['announce' => $announce]);
+
+        // or render a template
+        // in the template, print things with {{ product.name }}
+        // return $this->render('product/show.html.twig', ['product' => $product]);
     }
+
+
 
     /**
      * @Route("/admin", name="admin")

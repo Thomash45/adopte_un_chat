@@ -1,23 +1,16 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}New Announce{% endblock %}
+{% block title %}Nouvelle annonce{% endblock %}
 
 {% block body %}
 
-<div class="row">
+    <div class="row">
+        <div class="col-md-2"></div>
+        {{ include('announce_user/_form.html.twig') }}
     <div class="col-md-2"></div>
-
-
-    {{ include('announce_user/_form.html.twig') }}
-
-    <div class="col-md-2">
-
-
     </div>
-</div>
-
-
     <a href="{{ path('announce_index') }}">back to list</a>
+
 {% endblock %}
 {% block javascripts %}
     <script>
@@ -56,8 +49,7 @@
             var options = {
                 types: ['geocode'],
                 componentRestrictions: {country: 'fr'}
-            };
-
+            }
 
             autocomplete = new google.maps.places.Autocomplete(
                 /** @type {!HTMLInputElement} */(document.getElementById('autocomplete')),options);
@@ -87,9 +79,23 @@
             }
         }
 
+        function readURL(input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+
+                reader.onload = function (e) {
+                    $('#preview').attr('src', e.target.result);
+                }
+
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+
+        $("#announce_imageFile_file").change(function(){
+            readURL(this);
+        });
+
     </script>
-
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCfwoJois3eJUbve0k5ojWDqqInpVsm2Rk&&libraries=places&callback=initAutocomplete" async defer></script>
-
 
 {% endblock %}

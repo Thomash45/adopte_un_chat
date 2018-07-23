@@ -26,8 +26,6 @@ class AnnounceType extends AbstractType
             ->add('codePostal',HiddenType::class, array('attr' => array('disabled' => 'true')))
             ->add('departement',HiddenType::class, array('attr' => array('disabled' => 'true')))
             ->add('region',HiddenType::class, array('attr' => array('disabled' => 'true')))
-            ->add('lat')
-            ->add('lng')
             ->add('telephoneNumber')
             ->add('streetNumber',HiddenType::class)
             ->add('road',HiddenType::class)
