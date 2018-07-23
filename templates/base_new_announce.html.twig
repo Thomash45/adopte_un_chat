@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <link rel="icon" type="image/png" href="{{ asset('images/cat.png') }}" />
+        <title>{% block title %}Le Bon Chat{% endblock %}</title>
+        {% block stylesheets %}{% endblock %}
+        <link rel="stylesheet" href="{{ asset('build/css/main.css') }}"/>
+       <!-- <link rel="stylesheet" href="{{ asset('build/css/responsive.css') }}"/>
+        <link rel="stylesheet" href="{{ asset('build/css/uikit.css') }}"/>
+        <link rel="stylesheet" href="{{ asset('build/fonts/fontawesome.css') }}"/>
+        <link rel="stylesheet" href="{{ asset('build/fonts/fa-brands.css') }}"/>
+        <link rel="stylesheet" href="{{ asset('build/fonts/fa-regular.css') }}"/>
+        <link rel="stylesheet" href="{{ asset('build/fonts/fa-solid.css') }}"/> -->
+    </head>
+    <body onload="initialize()">
+    {% include '_navbar.html.twig' %}
+        {% block body %}{% endblock %}
+    {% include '_footer.html.twig' %}
+    <script type="text/javascript" src="{{ asset('build/js/bootstrap.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('build/js/jquery.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('build/js/script.js') }}"></script>
+
+        {% block javascripts %}{% endblock %}
+    </body>
+</html>
