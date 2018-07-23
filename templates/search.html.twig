@@ -54,7 +54,9 @@
 
             </aside> <!-- col.// -->
             <main class="col-sm-9">
-
+                <h4>{{ announces|length }} résultats  {% if search is defined %}
+                    pour " {{ search }} "
+                    {% endif %}</h4>
     {% for announce in announces %}
                 <article class="card card-product">
                     <div class="card-body">

@@ -67,13 +67,13 @@ class SearchController extends Controller
 
         if ($searchCity != ""){
             $announces = $this->getDoctrine()->getRepository(Announce::class)->findBySearchCity($searchCity);
-            return $this->render('search.html.twig',['announces' => $announces]);
+            return $this->render('search.html.twig',['announces' => $announces,'search' => $searchCity]);
         }elseif ($searchDepartement != ""){
             $announces = $this->getDoctrine()->getRepository(Announce::class)->findBySearchDep($searchDepartement);
-            return $this->render('search.html.twig',['announces' => $announces]);
+            return $this->render('search.html.twig',['announces' => $announces,'search' => $searchDepartement]);
         }elseif ($searchRegion != ""){
             $announces = $this->getDoctrine()->getRepository(Announce::class)->findBySearchRegion($searchRegion);
-            return $this->render('search.html.twig',['announces' => $announces]);
+            return $this->render('search.html.twig',['announces' => $announces,'search' => $searchRegion]);
         }else{
             return $this->redirectToRoute('index');
         }
