@@ -113,6 +113,14 @@ class Announce
     private $updatedAt;
 
     /**
+     * @return \DateTime
+     */
+    public function getUpdatedAt(): \DateTime
+    {
+        return $this->updatedAt;
+    }
+
+    /**
      * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $streetNumber;
@@ -159,6 +167,11 @@ class Announce
      * @ORM\Column(type="boolean")
      */
     private $is_premium;
+
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private $is_valid;
 
 
     public function getId()
@@ -460,6 +473,18 @@ class Announce
     public function setIsPremium(bool $is_premium): self
     {
         $this->is_premium = $is_premium;
+
+        return $this;
+    }
+
+    public function getIsValid(): ?bool
+    {
+        return $this->is_valid;
+    }
+
+    public function setIsValid(bool $is_valid): self
+    {
+        $this->is_valid = $is_valid;
 
         return $this;
     }

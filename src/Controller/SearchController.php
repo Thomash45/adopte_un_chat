@@ -44,6 +44,8 @@ class SearchController extends Controller
             ->add('race', EntityType::class, array(
                 // looks for choices from this entity
                 'class' => Race::class,
+                'placeholder' => 'Choisir une especes',
+                'required'   => false
                 ))
             ->getForm();
 
@@ -80,7 +82,7 @@ class SearchController extends Controller
         }
 
 
-        $infoSearchs =[$searchRace,$searchCity,$searchDepartement,$searchRegion];
+        $infoSearchs =[$searchCity,$searchDepartement,$searchRegion,$searchRace];
 
         $announces = $this->getDoctrine()->getRepository(Announce::class)->findBySearchGlobal($searchCity,$searchDepartement,$searchRegion,$searchRace);
             return $this->render('search.html.twig',['announces' => $announces,'infoSearchs' => $infoSearchs]);

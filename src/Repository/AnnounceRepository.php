@@ -38,19 +38,30 @@ class AnnounceRepository extends ServiceEntityRepository
         if ($race != "") {
             $keyrace = 'race';
             $valrace = $race;
+
+            return $this->createQueryBuilder('a')
+                ->Where('a.'.$key.' = :val')
+                ->andWhere('a.'.$keyrace.' = :valrace')
+                ->setParameter('val', $val)
+                ->setParameter('valrace', $race)
+                ->orderBy('a.id', 'ASC')
+                ->leftJoin('a.race', 'c')
+                ->addSelect('c')
+                ->getQuery()
+                ->getResult()
+                ;
+        }else{
+
+            return $this->createQueryBuilder('a')
+                ->Where('a.'.$key.' = :val')
+                ->setParameter('val', $val)
+                ->orderBy('a.id', 'ASC')
+                ->getQuery()
+                ->getResult()
+                ;
         }
 
-        return $this->createQueryBuilder('a')
-            ->andWhere('a.'.$key.' = :val')
-            ->andWhere('a.'.$keyrace.' = :valrace')
-            ->setParameter('val', $val)
-            ->setParameter('valrace', $race)
-            ->orderBy('a.id', 'ASC')
-            ->getQuery()
-            ->getResult()
-        ;
     }
-
 
     /*
     public function findOneBySomeField($value): ?Announce

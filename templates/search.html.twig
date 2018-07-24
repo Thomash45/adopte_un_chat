@@ -48,13 +48,14 @@
             </aside> <!-- col.// -->
             <main class="col-sm-9">
                 <h4>{{ announces|length }} résultats
+                    {% if infoSearchs is defined %}
                     {% if infoSearchs.0 != ""%}
                         pour " {{ infoSearchs.0 }} "
                     {% elseif infoSearchs.1 != "" %}
                         pour " {{ infoSearchs.1 }} "
                     {% elseif infoSearchs.2 != "" %}
                         pour " {{ infoSearchs.2 }} "
-                    {% endif %}
+                    {% endif %}{% else %}au total{% endif %}
                     </h4>
             {% for announce in announces %}
                 <article class="card card-product">

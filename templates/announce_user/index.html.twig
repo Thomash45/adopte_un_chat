@@ -3,49 +3,87 @@
 {% block title %}Announce index{% endblock %}
 
 {% block body %}
-    <h1>Announce index</h1>
 
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>Name</th>
-                <th>Year</th>
-                <th>Description</th>
-                <th>Adresse</th>
-                <th>City</th>
-                <th>CodePostal</th>
-                <th>Departement</th>
-                <th>Region</th>
-                <th>TelephoneNumber</th>
-                <th>actions</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for announce in announces %}
-            <tr>
-                <td>{{ announce.id }}</td>
-                <td>{{ announce.name }}</td>
-                <td>{{ announce.year }}</td>
-                <td>{{ announce.description }}</td>
-                <td>{{ announce.adresse }}</td>
-                <td>{{ announce.city }}</td>
-                <td>{{ announce.codePostal }}</td>
-                <td>{{ announce.departement }}</td>
-                <td>{{ announce.region }}</td>
-                <td>{{ announce.telephoneNumber }}</td>
-                <td>
-                    <a href="{{ path('announce_show', {'id': announce.id}) }}">show</a>
-                    <a href="{{ path('announce_edit', {'id': announce.id}) }}">edit</a>
-                </td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="11">no records found</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
+    <section class="section-content bg padding-y border-top">
+        <main class="container">
+            <div class="row">
+                <main class="col-sm-12">
+                    <div class="card">
+                        <table class="table table-hover shopping-cart-wrap">
+                            <thead class="text-muted">
+                            <tr>
+                                <th scope="col">Annonce</th>
+                                <th scope="col" width="120">Validation</th>
+                                <th scope="col" width="120">Priorité</th>
+                                <th scope="col" class="text-right" width="200">Action</th>
+                                <th scope="col" class="text-right" width="200">Suppression</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {% for announce in announces %}
+                            <tr>
+                                <td>
+                                    <figure class="media">
+                                        <div class="img-wrap"><img src="../../images/announce_img/{{ announce.imageName }}" class="img-thumbnail img-sm"></div>
+                                        <figcaption class="media-body">
+                                            <h6 class="title text-truncate">{{ announce.name }} </h6>
+                                            <dl class="dlist-inline small">
+                                                <dt>Espece: </dt>
+                                                <dd>{{ announce.race }}</dd>
+                                                <dt>Genre: </dt>
+                                                <dd>{{ announce.gender }}</dd>
+                                                <dt>Année: </dt>
+                                                <dd>{{ announce.year }}</dd>
+                                            </dl>
+                                            <dl class="dlist-inline small">
+                                                <dt>Date de Publication :  </dt>
+                                                <dd>{{ announce.updatedat | date("d/m/Y")}}</dd>
+                                            </dl>
+                                        </figcaption>
+                                    </figure>
+                                </td>
+                                <td>
+                                    <div class="price-wrap mt-2">
+                                        <var class="price">
+                                            </var>
+                                        <small class="text-muted">{% if  announce.isvalid %}
+                                                ok
+                                            {% else %}
+                                                En cours de validation
+                                            {% endif %}</small>
+                                    </div> <!-- price-wrap .// -->
+                                </td>
+                                <td>
+                                    <div class="price-wrap mt-2">
+                                        <var class="price">
+                                            </var>
+                                        <small class="text-muted">{% if  announce.ispremium %}
+                                                Premium
+                                            {% else %}
+                                                Normale
+                                            {% endif %}</small>
+                                    </div> <!-- price-wrap .// -->
+                                </td>
+                                <td class="text-right">
+                                    <a href="{{ path('announce_show', {'id': announce.id}) }}" class="btn btn-warning mt-2">Voir</a>
+                                    <a href="{{ path('announce_edit', {'id': announce.id}) }}" class="btn btn-warning mt-2">Editer</a>
 
-    <a href="{{ path('announce_new') }}">Create new</a>
-{% endblock %}
+                                </td>
+                                <td class="text-right">
+
+                                    <a href="{{ path('announce_edit', {'id': announce.id}) }}" class="btn btn-md btn-danger mt-2">Editer</a>
+                                </td>
+                            </tr>
+                            {% else %}
+                                <tr>
+                                    <td colspan="11">no records found</td>
+                                </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                 </main>
+            </div>
+        </main>
+    </section>
+    {% endblock %}
