@@ -22,10 +22,10 @@ class AnnounceType extends AbstractType
             ->add('year')
             ->add('description')
             ->add('adresse',TextType::class, array('attr' => array('onFocus' => 'geolocate()')))
-            ->add('city',HiddenType::class, array('attr' => array('disabled' => 'true')))
-            ->add('codePostal',HiddenType::class, array('attr' => array('disabled' => 'true')))
-            ->add('departement',HiddenType::class, array('attr' => array('disabled' => 'true')))
-            ->add('region',HiddenType::class, array('attr' => array('disabled' => 'true')))
+            ->add('city',HiddenType::class)
+            ->add('codePostal',HiddenType::class)
+            ->add('departement',HiddenType::class)
+            ->add('region',HiddenType::class)
             ->add('telephoneNumber')
             ->add('streetNumber',HiddenType::class)
             ->add('road',HiddenType::class)
@@ -34,7 +34,12 @@ class AnnounceType extends AbstractType
             ->add('coatColor')
             ->add('coatStyleColor')
             ->add('coat')
-            ->add('imageFile', VichImageType::class)
+            ->add('imageFile', VichImageType::class, [
+                'required' => false,
+                'download_label' => '...',
+                'download_uri' => true,
+                'image_uri' => true,
+            ])
         ;
     }
 

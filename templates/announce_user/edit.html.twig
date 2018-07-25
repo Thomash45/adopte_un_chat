@@ -1,13 +1,109 @@
-{% extends 'base.html.twig' %}
+{% extends 'base_new_announce.html.twig' %}
 
 {% block title %}Edit Announce{% endblock %}
 
 {% block body %}
-    <h1>Edit Announce</h1>
-
+    <div class="row">
+    <div class="col-md-2"></div>
     {{ include('announce_user/_form.html.twig', {'button_label': 'Update'}) }}
+    <div class="col-md-2"></div>
+        <div class="col-md-2"></div>
+        <div class="col-md-2 mb-5"> <a href="{{ path('announce_index') }}" class="btn btn-primary btn-block" > <i class="fa fa-arrow-alt-circle-left "></i> Retour à la liste </a></div>
+        <div class="col-md-4"></div>
+        <div class="col-md-2 mb-5">{{ include('announce_user/_delete_form.html.twig') }}</div>
+        <div class="col-md-2"></div>
+    </div>
+{% endblock %}
+    {% block javascripts %}
+        <script>
 
-    <a href="{{ path('announce_index') }}">back to list</a>
+            $('#announce_adresse').attr('id', 'autocomplete');
+            $('#announce_road').attr('id', 'route');
+            $('#announce_streetNumber').attr('id', 'street_number');
+            $('#announce_country').attr('id', 'country');
+            $('#announce_city').attr('id', 'locality');
+            $('#announce_region').attr('id', 'administrative_area_level_1');
+            $('#announce_codePostal').attr('id', 'postal_code');
+            $('#announce_departement').attr('id', 'administrative_area_level_2');
 
-    {{ include('announce_user/_delete_form.html.twig') }}
+
+            // This example displays an address form, using the autocomplete feature
+            // of the Google Places API to help users fill in the information.
+
+            // This example requires the Places library. Include the libraries=places
+            // parameter when you first load the API. For example:
+            // <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&libraries=places">
+
+            var placeSearch, autocomplete;
+            var componentForm = {
+                street_number: 'short_name',
+                route: 'long_name',
+                locality: 'long_name',
+                administrative_area_level_1: 'short_name',
+                administrative_area_level_2: 'short_name',
+                country: 'long_name',
+                postal_code: 'short_name'
+            };
+
+            function initAutocomplete() {
+                // Create the autocomplete object, restricting the search to geographical
+                // location types.
+                var options = {
+                    types: ['geocode'],
+                    componentRestrictions: {country: 'fr'}
+                }
+
+                autocomplete = new google.maps.places.Autocomplete(
+                    /** @type {!HTMLInputElement} */(document.getElementById('autocomplete')),options);
+
+                // When the user selects an address from the dropdown, populate the address
+                // fields in the form.
+                autocomplete.addListener('place_changed', fillInAddress);
+            }
+
+            function fillInAddress() {
+                // Get the place details from the autocomplete object.
+                var place = autocomplete.getPlace();
+
+                for (var component in componentForm) {
+                    document.getElementById(component).value = '';
+                    document.getElementById(component).disabled = false;
+                }
+
+                // Get each component of the address from the place details
+                // and fill the corresponding field on the form.
+                for (var i = 0; i < place.address_components.length; i++) {
+                    var addressType = place.address_components[i].types[0];
+                    if (componentForm[addressType]) {
+                        var val = place.address_components[i][componentForm[addressType]];
+                        document.getElementById(addressType).value = val;
+                    }
+                }
+            }
+
+            function readURL(input) {
+                if (input.files && input.files[0]) {
+                    var reader = new FileReader();
+
+                    reader.onload = function (e) {
+                        $('#preview').attr('src', e.target.result);
+                    }
+
+                    reader.readAsDataURL(input.files[0]);
+                }
+            }
+
+            $(document).ready(function(){
+                $(".vich-image div ").css({"display": "none"});
+                $(".vich-image a ").css({"display": "none"});
+            });
+
+            $("#announce_imageFile_file").change(function(){
+                readURL(this);
+            });
+
+        </script>
+        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCfwoJois3eJUbve0k5ojWDqqInpVsm2Rk&&libraries=places&callback=initAutocomplete" async defer></script>
+
+
 {% endblock %}

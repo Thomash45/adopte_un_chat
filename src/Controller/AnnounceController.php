@@ -21,7 +21,9 @@ class AnnounceController extends Controller
      */
     public function index(AnnounceRepository $announceRepository): Response
     {
-        return $this->render('announce_user/index.html.twig', ['announces' => $announceRepository->findAll()]);
+        $user = $this->getUser();
+
+        return $this->render('announce_user/index.html.twig', ['announces' => $announceRepository->findBy(array('author'=>$user), $orderBy = ['id'=>'DESC'], $limit = null, $offset = null)]);
     }
 
     /**
@@ -35,6 +37,7 @@ class AnnounceController extends Controller
         $form->handleRequest($request);
         $announce->setAuthor($user);
         $announce->setIsPremium(false);
+        $announce->setIsValid(false);
 
         if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
@@ -85,7 +88,7 @@ class AnnounceController extends Controller
         if ($form->isSubmitted() && $form->isValid()) {
             $this->getDoctrine()->getManager()->flush();
 
-            return $this->redirectToRoute('announce_edit', ['id' => $announce->getId()]);
+            return $this->redirectToRoute('announce_show', ['id' => $announce->getId()]);
         }
 
         return $this->render('announce_user/edit.html.twig', [

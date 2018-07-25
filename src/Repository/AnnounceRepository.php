@@ -42,6 +42,7 @@ class AnnounceRepository extends ServiceEntityRepository
             return $this->createQueryBuilder('a')
                 ->Where('a.'.$key.' = :val')
                 ->andWhere('a.'.$keyrace.' = :valrace')
+                ->andWhere('a.is_valid = true')
                 ->setParameter('val', $val)
                 ->setParameter('valrace', $race)
                 ->orderBy('a.id', 'ASC')
@@ -54,6 +55,7 @@ class AnnounceRepository extends ServiceEntityRepository
 
             return $this->createQueryBuilder('a')
                 ->Where('a.'.$key.' = :val')
+                ->andWhere('a.is_valid = true')
                 ->setParameter('val', $val)
                 ->orderBy('a.id', 'ASC')
                 ->getQuery()

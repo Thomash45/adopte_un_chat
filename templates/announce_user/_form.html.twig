@@ -6,8 +6,6 @@
         <button class="btn btn-primary mb-2 mt-2 pull-right"><i class="fa fa-paper-plane"> </i> {{ button_label|default('Envoyer mon Annonce') }}</button>
     </header>
     <article class="card-body">
-        {{ form_start(form) }}
-        {{ form_errors(form) }}
             <div class="row">
                 <div class="col-md-6">
                     <div class="form-row">
@@ -55,7 +53,7 @@
 
                             {{ form_row(form.imageFile) }}
 
-                            <div class="text-center border border-warning p-2"><img id="preview" src="{{ asset('images/catupload.png') }}" alt="" width="380px"  /></div>
+                            <div class="text-center border border-warning p-2"><img id="preview" src="{% if announce.imageName is defined %} ../../../images/announce_img/{{ announce.imageName}}{% else %} {{ asset('images/catupload.png') }} {% endif %}" alt="" width="380px"  /></div>
 
                         </div> <!-- form-group end.// -->
                     </div> <!-- form-row end.// -->

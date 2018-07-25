@@ -19,8 +19,8 @@ class DefaultController extends Controller
         $announceRepository = $this->getDoctrine()->getRepository(Announce::class);
 
         return $this->render('index.html.twig', [
-            'announces' => $announceRepository->findBy(array(), $orderBy = null, $limit = 3, $offset = null),
-            'premium' => $announceRepository->findOneBy(array('is_premium'=>1))
+            'announces' => $announceRepository->findBy(array('is_valid'=>1), $orderBy = ['id'=>'DESC'], $limit = 3, $offset = null),
+            'premium' => $announceRepository->findOneBy(array('is_premium'=>1,'is_valid'=>1))
             ]);
     }
 

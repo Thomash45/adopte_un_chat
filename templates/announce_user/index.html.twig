@@ -12,10 +12,10 @@
                         <table class="table table-hover shopping-cart-wrap">
                             <thead class="text-muted">
                             <tr>
-                                <th scope="col">Annonce</th>
+                                <th scope="col">{{ announces|length }} annonces en cours</th>
                                 <th scope="col" width="120">Validation</th>
                                 <th scope="col" width="120">Priorité</th>
-                                <th scope="col" class="text-right" width="200">Action</th>
+                                <th scope="col" class="text-center" width="200">Action</th>
                                 <th scope="col" class="text-right" width="200">Suppression</th>
                             </tr>
                             </thead>
@@ -47,7 +47,7 @@
                                         <var class="price">
                                             </var>
                                         <small class="text-muted">{% if  announce.isvalid %}
-                                                ok
+                                                Validé
                                             {% else %}
                                                 En cours de validation
                                             {% endif %}</small>
@@ -71,7 +71,7 @@
                                 </td>
                                 <td class="text-right">
 
-                                    <a href="{{ path('announce_edit', {'id': announce.id}) }}" class="btn btn-md btn-danger mt-2">Editer</a>
+                                    <div class=">{{ include('announce_user/_delete_form_list.html.twig') }}</div>
                                 </td>
                             </tr>
                             {% else %}
